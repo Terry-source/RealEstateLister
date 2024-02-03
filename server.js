@@ -3,16 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require("express-session");
 var passport = require('passport');
+var methodOverride = require('method-override');
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+
 require("dotenv").config(); // dotenv
 require("./config/database"); // connect to database
-require("./config/passport-setup"); // passport
+require("./config/passport"); // passport
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var propertiesRouter = require('./routes/properties');
 var suburbsRouter = require('./routes/suburbs');
-
 
 var app = express();
 
@@ -22,10 +25,26 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // turn on nested objects in query strings, not sure what will happen, but testing out
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 app.use(passport.initialize()); // passport
+app.use(passport.session());
+
+// Add this middleware BELOW passport middleware
+app.use(function (req, res, next) {
+  res.locals.user = req.user; // Now the `user` variable is available inside all EJS templates (will be `undefined` if no logged in user)
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

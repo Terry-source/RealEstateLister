@@ -11,10 +11,13 @@
     "dotenv": "^16.4.1",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-session": "^1.18.0",
     "http-errors": "~1.6.3",
+    "method-override": "^3.0.0",
     "mongoose": "^8.1.1",
     "morgan": "~1.9.1",
     "passport": "^0.7.0",
+    "passport-google-oauth": "^2.0.0",
     "passport-google-oauth20": "^2.0.0"
   },
   "description": "## App Overview This Real Estate Listing Platform called RealEstateLister is a full-stack web application designed to connect property owners with potential buyers and renters. It allows users to explore, list, and manage real estate properties with ease. Featuring a user-friendly interface, and secure login mechanisms, this platform streamlines the process of buying, selling, and renting properties.",
