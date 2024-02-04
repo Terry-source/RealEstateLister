@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+    <body>
+        <main>
+            <h1>Add New Property</h1>
+            <form id="new-form" action="/properties" method="POST">
+                <div>
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div>
+                    <label for="rooms">Rooms:</label>
+                    <input type="number" id="rooms" name="rooms" required>
+                </div>
+                <div>
+                    <label for="bathrooms">Bathrooms:</label>
+                    <input type="number" id="bathrooms" name="bathrooms" required>
+                </div>
+                <div>
+                    <label for="imageUrl">Image URL:</label>
+                    <input type="text" id="imageUrl" name="imageUrl" required>
+                </div>
+                <div>
+                    <label for="owner">Owner ID:</label>
+                    <input type="text" id="owner" name="owner" required value="<%= ownerId %>">
+                </div>
+                <div>
+                    <label for="suburb">Suburb:</label>
+                    <select id="suburb" name="suburb" required>
+                        <% suburbs.forEach(function(suburb) { %>
+                            <option value="<%= suburb._id %>">
+                                <%= suburb.name %>
+                            </option>
+                            <% }); %>
+                    </select>
+                </div>
+                <button type="submit">Add Property</button>
+            </form>
+
+
+            <%- include('../partials/footer') %>

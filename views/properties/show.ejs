@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+    <body>
+        <main>
+            <h1>Property Details</h1>
+            <div class="property-details">
+                <h2>
+                    <%= property.address %>
+                </h2>
+                <p>Rooms: <%= property.rooms %>
+                </p>
+                <p>Bathrooms: <%= property.bathrooms %>
+                </p>
+                <% if (property.imageUrl) { %>
+                    <img src="<%= property.imageUrl %>" alt="Image of <%= property.address %>"
+                        style="max-width: 100%; height: auto;">
+                    <% } else { %>
+                        <p>No image available.</p>
+                        <% } %>
+                            <% if (property.suburb && property.suburb.name) { %>
+                                <p>Suburb: <a href="/suburbs/<%= property.suburb._id %>">
+                                        <%= property.suburb.name %>
+                                    </a></p>
+                                <% } %>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>

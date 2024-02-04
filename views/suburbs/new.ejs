@@ -1,0 +1,18 @@
+<%- include('../partials/header') %>
+
+    <body>
+        <main>
+            <form id="new-form" action="/suburbs" method="POST">
+                <div>
+                    <label for="name">Suburb Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="info">Suburb Info:</label>
+                    <textarea id="info" name="info"></textarea>
+                </div>
+                <button type="submit">Add Suburb</button>
+            </form>
+
+
+            <%- include('../partials/footer') %>
