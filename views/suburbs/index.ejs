@@ -1,0 +1,11 @@
+<%- include('../partials/header') %>
+
+<ul>
+  <% suburbs.forEach(function(suburb){ %>
+  <li>
+    <a href="/suburbs/<%= suburb._id %>"> <%= suburb.name %> </a>
+  </li>
+  <% }); %>
+</ul>
+
+<%- include('../partials/footer') %>

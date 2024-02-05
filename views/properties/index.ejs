@@ -1,9 +1,11 @@
-<body>
-    <h1>Properties</h1>
-    <ul>
-        <% properties.forEach(function(property){ %>
-            <li><a href="/properties/<%= property._id %>">
-                    <%= property.address %>
-                </a></li>
-            <% }); %>
-    </ul>
+<%- include('../partials/header') %>
+
+<ul>
+  <% properties.forEach(function(property){ %>
+  <li>
+    <a href="/properties/<%= property._id %>"> <%= property.address %> </a>
+  </li>
+  <% }); %>
+</ul>
+
+<%- include('../partials/footer') %>

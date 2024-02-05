@@ -1,0 +1,11 @@
+<%- include('../partials/header') %>
+
+<ul>
+  <% users.forEach(function(user){ %>
+  <li>
+    <a href="/users/<%= user._id %>"> <%= user.name %> </a>
+  </li>
+  <% }); %>
+</ul>
+
+<%- include('../partials/footer') %>
