@@ -77,9 +77,47 @@ async function create(req, res) {
   }
 }
 
+async function edit(req, res) {
+  try {
+    const property = await Property.findById(req.params.id);
+    const suburbs = await Suburb.find();
+    res.render("properties/edit", {
+      title: `Edit ${property.address}`,
+      property,
+      suburbs,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+}
+
+async function update(req, res) {
+  try {
+    await Property.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect(`/properties/${req.params.id}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+}
+
+async function deleteProperty(req, res) {
+  try {
+    await Property.findByIdAndDelete(req.params.id);
+    res.redirect("/properties");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+}
+
 module.exports = {
   index,
   show,
   new: newProperty,
   create,
+  edit,
+  update,
+  delete: deleteProperty,
 };

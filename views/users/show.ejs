@@ -24,7 +24,21 @@
       <% user.properties.forEach(function(property) { %>
       <li class="property-item">
         Property ID: <%= property %>
-        <!-- Display more property details if needed -->
+        <a href="/properties/<%= property %>">View</a>
+
+        <!-- Show update and delete buttons if the current user is the property owner -->
+        <% if (currentUser && currentUser._id.toString() ===
+        property.user.toString()) { %>
+        <form action="/properties/<%= property._id %>/edit" method="get">
+          <button type="submit">Update</button>
+        </form>
+        <form
+          action="/properties/<%= property._id %>?_method=DELETE"
+          method="post"
+        >
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
       </li>
       <% }); %>
     </ul>
