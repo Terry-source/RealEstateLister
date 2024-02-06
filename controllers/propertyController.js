@@ -8,7 +8,11 @@ async function index(req, res) {
     const properties = await Property.find({})
       .populate("owner")
       .populate("suburb");
-    res.render("properties/index", { title: "All Properties", properties });
+    res.render("properties/index", {
+      title: "All Properties",
+      properties,
+      user: req.user,
+    });
   } catch (error) {
     console.log(error);
     res.redirect("/");
@@ -20,7 +24,11 @@ async function show(req, res) {
     const property = await Property.findById(req.params.id)
       .populate("owner")
       .populate("suburb");
-    res.render("properties/show", { title: property.address, property });
+    res.render("properties/show", {
+      title: property.address,
+      property,
+      user: req.user,
+    });
   } catch (error) {
     console.log(error);
     res.redirect("/");
@@ -40,6 +48,7 @@ async function newProperty(req, res) {
       errorMsg: "",
       ownerId: req.user._id.toString(),
       suburbs,
+      user: req.user,
     });
   } catch (err) {
     console.error(err);
@@ -73,6 +82,7 @@ async function create(req, res) {
       errorMsg: err.message,
       title: "Add New Property",
       ownerId: req.user._id.toString(),
+      user: req.user,
     });
   }
 }

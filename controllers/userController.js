@@ -14,7 +14,12 @@ async function user_profile(req, res) {
     const user = await User.findById(req.params.id);
 
     const properties = await Property.find({ owner: user._id });
-    res.render("users/profile", { user, properties });
+    res.render("users/profile", {
+      currentUser: req.user,
+      user,
+      properties,
+      title: `${user.name}'s Profile Page`,
+    });
   } catch (error) {
     console.log(error);
     res.redirect("/");
@@ -25,7 +30,12 @@ async function user_profile(req, res) {
 async function index(req, res) {
   try {
     const users = await User.find({}).populate("properties");
-    res.render("users/index", { title: "All Users", users });
+
+    res.render("users/index", {
+      title: "All Users",
+      users,
+      currentUser: req.user,
+    });
   } catch (error) {
     console.log(error);
     res.redirect("/");
@@ -34,11 +44,14 @@ async function index(req, res) {
 
 async function show(req, res) {
   try {
-    const user = await User.findById(req.params.id).populate("properties");
+    const creator = await User.findById(req.params.id).populate("properties");
+
     res.render("users/show", {
-      title: user.name,
-      properties: user.properties,
-      user,
+      creator,
+      title: creator.name,
+      properties: creator.properties,
+      currentUser: req.user || {},
+      avatar: creator.avatar,
     });
   } catch (error) {
     console.log(error);

@@ -20,6 +20,7 @@
             <a href="/properties" <%- title==='All Properties' ? 'class="active"' : '' %>>Properties</a>
             <a href="/suburbs" <%- title==='All Suburbs' ? 'class="active"' : '' %>>Suburbs</a>
             <a href="/users" <%- title==='All Users' ? 'class="active"' : '' %>>Users</a>
+            
             <% if (user) { %>
                 <a href="/users/profile" <%- title==='Your Profile' ? 'class="active"' : '' %>>Your Profile</a>
                 <a href="/properties/new" <%- title==='Add Property' ? 'class="active"' : '' %>>Add Property</a>
