@@ -57,6 +57,13 @@ Pages kept crashing because I forgot to pass title to the controller when render
 
 Adding links to all linked collections when creating a property. Ie linking a user/owner and a suburb to each new property listing, so that properties can be listed according to suburb or user.
 
-Some pages would change the headings because it didn't detect if user was logged in.
+Some pages would change the headings because it didn't detect if user was logged in. Had to pass through the right variable to the controller.
 
-Had to pass through the right variable to the controller.
+Hiding the ownerid in the form.
+
+# To do
+Your Profile
+
+Update / Delete functions.
+
+Add images to all pages.

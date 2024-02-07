@@ -1,11 +1,56 @@
 <%- include('../partials/header') %>
 
-<ul>
-  <% users.forEach(function(user){ %>
-  <li>
-    <a href="/users/<%= user._id %>"> <%= user.name %> </a>
-  </li>
-  <% }); %>
-</ul>
+  <style>
+    .property-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
 
-<%- include('../partials/footer') %>
+    .property-item {
+      text-align: center;
+    }
+
+    .property-item img {
+      width: 50%;
+      max-width: 100px;
+
+      height: auto;
+      border-radius: 5px;
+
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .property-item img:hover {
+      transform: scale(1.05);
+
+    }
+
+    .property-item a {
+      display: block;
+
+      text-decoration: none;
+      color: #333;
+
+      margin-top: 10px;
+
+    }
+  </style>
+
+  <ul class="property-list">
+    <% users.forEach(function(user){ %>
+      <li class="property-item">
+        <a href="/users/<%= user._id %>">
+          <img src="<%= user.avatar %>" alt="Property Picture">
+        </a>
+        <a href="/users/<%= user._id %>">
+          <%= user.name %>
+        </a>
+      </li>
+      <% }); %>
+  </ul>
+
+  <%- include('../partials/footer') %>

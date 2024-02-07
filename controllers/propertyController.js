@@ -76,6 +76,7 @@ async function create(req, res) {
     // Redirect to the new property's show functionality
     res.redirect(`/properties/${property._id}`);
   } catch (err) {
+    const suburbs = await Suburb.find();
     // Typically some sort of validation error
     console.log(err);
     res.render("properties/new", {
@@ -83,6 +84,7 @@ async function create(req, res) {
       title: "Add New Property",
       ownerId: req.user._id.toString(),
       user: req.user,
+      suburbs,
     });
   }
 }

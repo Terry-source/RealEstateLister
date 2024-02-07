@@ -21,8 +21,8 @@
                     <input type="text" id="imageUrl" name="imageUrl" required>
                 </div>
                 <div>
-                    <label for="owner">Owner ID:</label>
-                    <input type="text" id="owner" name="owner" required value="<%= ownerId %>">
+                    <label for="owner">Owner ID: <%= user.name %></label>
+                    <input type="hidden" id="owner" name="owner" required value="<%= ownerId %>">
                 </div>
                 <div>
                     <label for="suburb">Suburb:</label>
