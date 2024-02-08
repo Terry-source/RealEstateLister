@@ -11,14 +11,16 @@ async function user_logout(req, res) {
 
 async function user_profile(req, res) {
   try {
-    const user = await User.findById(req.params.id);
+    const currentUser = req.user;
+    const creator = await User.findById(currentUser._id).populate("properties");
 
-    const properties = await Property.find({ owner: user._id });
     res.render("users/profile", {
-      currentUser: req.user,
-      user,
-      properties,
-      title: `${user.name}'s Profile Page`,
+      title: "Profile",
+      creator,
+      title: creator.name,
+      properties: creator.properties,
+      currentUser,
+      avatar: creator.avatar,
     });
   } catch (error) {
     console.log(error);

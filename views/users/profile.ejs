@@ -1,53 +1,98 @@
 <%- include('../partials/header') %>
 
-<main>
-  <div>
-    <% if (user.avatar) { %>
-    <img src="<%= user.avatar %>" alt="User avatar" class="avatar" />
-    <% } else { %>
-    <img
-      src="/path/to/default/avatar.png"
-      alt="Default avatar"
-      class="avatar"
-    />
-    <% } %>
-    <h2><%= user.name %></h2>
-    <% if (user.email) { %>
-    <p>Email: <%= user.email %></p>
-    <% } %>
-  </div>
+<style>
+  .property-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
 
-  <section>
-    <h3>Properties</h3>
-    <% if (user.properties.length > 0) { %>
-    <ul class="property-list">
-      <% user.properties.forEach(function(property) { %>
-      <li class="property-item">
-        Property address: <%= property.address %>
-        <br />
-        <br />
-        <a href="/properties/<%= property._id %>">View</a>
+  .property-item {
+    text-align: center;
+  }
 
-        <!-- Show update and delete buttons if the current user is the property owner -->
-        <% if (currentUser && currentUser._id.toString() ===
-        property.user.toString()) { %>
-        <form action="/properties/<%= property._id %>/edit" method="get">
-          <button type="submit">Update</button>
-        </form>
-        <form
-          action="/properties/<%= property._id %>?_method=DELETE"
-          method="post"
+  .property-item img {
+    width: 100%;
+    max-width: 300px;
+
+    height: auto;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .property-item img:hover {
+    transform: scale(1.05);
+  }
+
+  .property-item a {
+    display: block;
+
+    text-decoration: none;
+    color: #333;
+
+    margin-top: 10px;
+  }
+</style>
+
+<div>
+  <% if (avatar) { %>
+  <img src="<%= avatar %>" alt="creator avatar" class="avatar" />
+  <% } else { %>
+  <img src="/path/to/default/avatar.png" alt="Default avatar" class="avatar" />
+  <% } %>
+  <h2><%= creator.name %></h2>
+  <% if (creator.email) { %>
+  <p>Email: <%= creator.email %></p>
+  <% } %>
+</div>
+
+<section>
+  <h3>Properties</h3>
+  <% if (properties.length > 0) { %>
+  <ul class="property-list">
+    <% properties.forEach(function(property) { %>
+    <li class="property-item">
+      <a href="/properties/<%= property._id %>">
+        <img src="<%= property.imageUrl %>" alt="Property Picture" />
+      </a>
+      <a href="/properties/<%= property._id %>">
+        <%= property.address %>, <%= property.suburb.name %>
+
+        <br />
+        <small
+          >Rooms: <%= property.rooms %>, Bathrooms: <%= property.bathrooms
+          %></small
         >
-          <button type="submit">Delete</button>
-        </form>
-        <% } %>
-      </li>
-      <% }); %>
-    </ul>
-    <% } else { %>
-    <p>No properties listed.</p>
-    <% } %>
-  </section>
+      </a>
 
-  <%- include('../partials/footer') %>
-</main>
+      <!-- 
+
+
+      Property address: <%= property.address %>
+      <br />
+      <br />
+      <a href="/properties/<%= property._id %>">View</a> -->
+
+      <% if (currentUser && currentUser._id && property.owner &&
+      currentUser._id.toString() === property.owner.toString()) { %>
+      <form action="/properties/<%= property._id %>/edit" method="get">
+        <button type="submit">Update</button>
+      </form>
+      <form action="/properties/<%= property._id %>/delete" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit">Delete</button>
+      </form>
+      <% } %>
+    </li>
+    <% }); %>
+  </ul>
+  <% } else { %>
+  <p>No properties listed.</p>
+  <% } %>
+</section>
+
+<%- include('../partials/footer') %>
