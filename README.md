@@ -6,10 +6,10 @@ This Real Estate Listing Platform called RealEstateLister is a full-stack web ap
 
 ## Screenshot(s)
 
-![Landing Page](path/to/landing_page_screenshot.png)
+![Landing Page](https://github.com/Terry-source/RealEstateLister/blob/main/landing_page_screenshot.PNG)
 _Screenshot of the landing page_
 
-![Property Listings](path/to/property_listings_screenshot.png)
+![Property Listings](https://github.com/Terry-source/RealEstateLister/blob/main/property_listings_screenshot.PNG)
 _Screenshot of the property listings page_
 
 ## Technologies Used
@@ -62,8 +62,3 @@ Some pages would change the headings because it didn't detect if user was logged
 Hiding the ownerid in the form.
 
 Populate the properties, so they pull through another schema/model.
-
-# To do
-Add images to all pages.
-
-deploy on render.com
