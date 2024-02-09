@@ -28,7 +28,6 @@ async function user_profile(req, res) {
   }
 }
 
-// more efficient way to export multiple functions just to include exports. in front of each function
 async function index(req, res) {
   try {
     const users = await User.find({}).populate("properties");
