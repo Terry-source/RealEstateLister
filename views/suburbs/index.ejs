@@ -9,20 +9,21 @@
     }
 
     .suburb {
-      border: 1px solid #ccc;
       padding: 10px;
       border-radius: 5px;
     }
 
     .suburb h2 {
       font-size: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
+      text-align: center;
     }
 
     .properties-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 10px;
+
     }
 
     .property-thumbnail {
@@ -32,10 +33,20 @@
       overflow: hidden;
     }
 
+    .property-thumbnail:hover {
+      transform: scale(1.05);
+    }
+
     .property-thumbnail img {
       width: 100%;
       height: auto;
       object-fit: cover;
+    }
+
+    .property-info {
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 50px;
     }
   </style>
 
@@ -50,6 +61,14 @@
             <div class="property-thumbnail">
               <a href="/properties/<%= property._id %>">
                 <img src="<%= property.imageUrl %>" alt="Property image">
+              </a>
+            </div>
+            <div class="property-info">
+              <a href="/properties/<%= property._id %>">
+                <%= property.address %><br>
+                  <small>
+                    <%= suburb.name %>
+                  </small>
               </a>
             </div>
             <% }); %>

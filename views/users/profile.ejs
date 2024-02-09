@@ -1,92 +1,100 @@
 <%- include('../partials/header') %>
 
-<style>
-  .property-list {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-  }
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
 
-  .property-item {
-    text-align: center;
-  }
+    .property-list {
+      list-style: none;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
 
-  .property-item img {
-    width: 100%;
-    max-width: 300px;
+    .property-item {
+      border-radius: 5px;
+      overflow: hidden;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
 
-    height: auto;
-    border-radius: 5px;
+    .property-item:hover {
+      transform: scale(1.05);
+    }
 
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
+    .property-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px 5px 0 0;
+    }
 
-  .property-item img:hover {
-    transform: scale(1.05);
-  }
+    .property-item a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+      margin-top: 10px;
+    }
 
-  .property-item a {
-    display: block;
+    .avatar {
+      display: block;
+      margin: 0 auto;
+      width: 150px;
+      height: auto;
+      border-radius: 50%;
+    }
+  </style>
 
-    text-decoration: none;
-    color: #333;
+  <div class="creator-info">
+    <% if (avatar) { %>
+      <img src="<%= avatar %>" alt="creator avatar" class="avatar" />
+      <% } else { %>
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
+          alt="Default avatar" class="avatar" />
+        <% } %>
+          <% if (creator.email) { %>
+            <p>Email: <%= creator.email %>
+            </p>
+            <% } %>
+  </div>
 
-    margin-top: 10px;
-  }
-</style>
+  <section>
+    <h3>Properties</h3>
+    <% if (properties.length> 0) { %>
+      <ul class="property-list">
+        <% properties.forEach(function(property) { %>
+          <li class="property-item">
+            <a href="/properties/<%= property._id %>">
+              <img src="<%= property.imageUrl %>" alt="Property Picture">
+            </a>
+            <a href="/properties/<%= property._id %>">
+              <%= property.address %>, <%= property.suburb.name %>
+                  <br>
+                  <small>Rooms: <%= property.rooms %>, Bathrooms: <%= property.bathrooms %></small>
+            </a>
+            <% if (currentUser && currentUser._id && property.owner &&
+              currentUser._id.toString()===property.owner.toString()) { %>
+              <div class="button-container">
+                <form action="/properties/<%= property._id %>/edit" method="get">
+                  <button type="submit">Update</button>
+                </form>
+                <form action="/properties/<%= property._id %>?_method=DELETE" method="post">
+                  <button type="submit">Delete</button>
+                </form>
+              </div>
+              <% } %>
+          </li>
+          <% }); %>
+      </ul>
+      <% } else { %>
+        <p>No properties listed.</p>
+        <% } %>
+  </section>
 
-<div>
-  <% if (avatar) { %>
-  <img src="<%= avatar %>" alt="creator avatar" class="avatar" />
-  <% } else { %>
-  <img src="/path/to/default/avatar.png" alt="Default avatar" class="avatar" />
-  <% } %>
-  <h2><%= creator.name %></h2>
-  <% if (creator.email) { %>
-  <p>Email: <%= creator.email %></p>
-  <% } %>
-</div>
-
-<section>
-  <h3>Properties</h3>
-  <% if (properties.length > 0) { %>
-  <ul class="property-list">
-    <% properties.forEach(function(property) { %>
-    <li class="property-item">
-      <a href="/properties/<%= property._id %>">
-        <img src="<%= property.imageUrl %>" alt="Property Picture" />
-      </a>
-      <a href="/properties/<%= property._id %>">
-        <%= property.address %>, <%= property.suburb.name %>
-
-        <br />
-        <small
-          >Rooms: <%= property.rooms %>, Bathrooms: <%= property.bathrooms
-          %></small
-        >
-      </a>
-
-      <% if (currentUser && currentUser._id && property.owner &&
-      currentUser._id.toString() === property.owner.toString()) { %>
-      <form action="/properties/<%= property._id %>/edit" method="get">
-        <button type="submit">Update</button>
-      </form>
-      <form
-        action="/properties/<%= property._id %>?_method=DELETE"
-        method="post"
-      >
-        <button type="submit">Delete</button>
-      </form>
-      <% } %>
-    </li>
-    <% }); %>
-  </ul>
-  <% } else { %>
-  <p>No properties listed.</p>
-  <% } %>
-</section>
-
-<%- include('../partials/footer') %>
+  <%- include('../partials/footer') %>

@@ -182,7 +182,7 @@ hr {
   text-align: center;
 }
 
-/* User Profile Styles */
+
 .login,
 .review-user {
   display: flex;
@@ -200,5 +200,31 @@ hr {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  object-fit: cover; /* covers the area */
+  object-fit: cover;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.button-container form {
+  margin: 0;
+}
+
+button {
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
