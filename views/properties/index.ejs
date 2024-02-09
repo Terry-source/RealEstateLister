@@ -1,61 +1,68 @@
 <%- include('../partials/header') %>
 
-
   <style>
-    .property-list {
-      list-style: none;
+    body,
+    html {
+      margin: 0;
       padding: 0;
+      width: 100%;
+    }
+
+    .property-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
+      padding: 20px;
+      list-style: none;
     }
 
     .property-item {
+      overflow: hidden;
       text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .property-item:hover {
     }
 
     .property-item img {
       width: 100%;
-      max-width: 300px;
-
       height: auto;
-      border-radius: 5px;
-
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .property-item img:hover {
-      transform: scale(1.05);
-
+      border-bottom: 1px solid #ccc;
     }
 
     .property-item a {
       display: block;
-
-      text-decoration: none;
+      padding: 10px;
       color: #333;
+      text-decoration: none;
+    }
 
-      margin-top: 10px;
+    .property-item img:hover {
+      transform: scale(1.05);
+    }
 
+    .property-details {
+      font-size: 0.9em;
+      color: #666;
     }
   </style>
 
-  <ul class="property-list">
-    <% properties.forEach(function(property){ %>
-      <li class="property-item">
-        <a href="/properties/<%= property._id %>">
-          <img src="<%= property.imageUrl %>" alt="Property Picture">
-        </a>
-        <a href="/properties/<%= property._id %>">
-          <%= property.address %>, <%= property.suburb.name %>
-
-              <br>
-              <small>Rooms: <%= property.rooms %>, Bathrooms: <%= property.bathrooms %></small>
-        </a>
-
-      </li>
-      <% }); %>
-  </ul>
+  <main>
+    <ul class="property-list">
+      <% properties.forEach(function(property) { %>
+        <li class="property-item">
+          <a href="/properties/<%= property._id %>">
+            <img src="<%= property.imageUrl %>" alt="Property Picture">
+            <div>
+              <%= property.address %>, <%= property.suburb.name %>
+            </div>
+            <div class="property-details">Rooms: <%= property.rooms %>, Bathrooms: <%= property.bathrooms %>
+            </div>
+          </a>
+        </li>
+        <% }); %>
+    </ul>
+  </main>
 
   <%- include('../partials/footer') %>

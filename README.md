@@ -61,9 +61,7 @@ Some pages would change the headings because it didn't detect if user was logged
 
 Hiding the ownerid in the form.
 
+Populate the properties, so they pull through another schema/model.
+
 # To do
-Your Profile
-
-Update / Delete functions.
-
 Add images to all pages.

@@ -4,7 +4,7 @@ const Suburb = require("../models/suburb");
 // more efficient way to export multiple functions just to include exports. in front of each function
 async function index(req, res) {
   try {
-    const suburbs = await Suburb.find({}); // .populate('properties')
+    const suburbs = await Suburb.find().populate('properties')
     res.render("suburbs/index", { title: "All Suburbs", suburbs });
   } catch (error) {
     console.log(error);

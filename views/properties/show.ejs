@@ -70,9 +70,13 @@
         <div class="owner-info">
           <h3>Owner Contact Information</h3>
           <% if (property.owner.avatar) { %>
-            <img src="<%= property.owner.avatar %>" alt="<%= property.owner.name %>'s Avatar" class="owner-avatar">
+            <a href="/users/<%= property.owner._id %>">
+              <img src="<%= property.owner.avatar %>" alt="<%= property.owner.name %>'s Avatar" class="owner-avatar">
+            </a>
             <% } else { %>
-              <img src="/path/to/default/avatar.png" alt="Default Avatar" class="owner-avatar">
+              <img
+                src="https://www.dlf.pt/dfpng/middlepng/276-2761324_transparent-default-avatar-png-profile-no-image-icon.png"
+                alt="Default Avatar" class="owner-avatar">
               <% } %>
                 <p><strong>Name:</strong>
                   <%= property.owner.name %>
