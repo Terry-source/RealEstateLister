@@ -65,3 +65,5 @@ Populate the properties, so they pull through another schema/model.
 
 # To do
 Add images to all pages.
+
+deploy on render.com
