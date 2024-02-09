@@ -25,7 +25,7 @@ Deployment: Render
 
 To explore RealEstateLister, follow these steps:
 
-## Visit the Live Site: [RealEstateLister Live]
+## Visit the Live Site: https://real-estate-lister.onrender.com/
 
 Sign Up/Login: Use OAuth to quickly sign up or log in.
 Explore Listings: Browse through the property listings or use the search functionality to find your dream home.
