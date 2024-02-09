@@ -43,7 +43,7 @@ Virtual Tours: Incorporating virtual tours of properties.
 
 ## Trello Board
 
-For a behind-the-scenes look at the planning and development process of RealEstateLister, visit our [Trello Board].
+For a behind-the-scenes look at the planning and development process of RealEstateLister, visit our https://trello.com/b/z7cKeMYd/mongoproject.
 
 RealEstateLister is committed to making the property buying, selling, and renting process as smooth as possible. We are constantly working to improve the platform and welcome any feedback or suggestions.
 
